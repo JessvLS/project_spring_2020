@@ -5,7 +5,7 @@
             "path": "pipelines/analyse_samples",
             "processing": true,
             "config_file": "config.yaml",
-            "config": " min_reads=50 min_pcent=0.01 bin_factor=loc_genotype ",
+            "config": " min_reads=10 min_pcent=0.01 bin_factor=loc_genotype ",
             "requires": [
                 {
                     "file": "references.fasta",
