@@ -1,11 +1,4 @@
-# realtime-noro
-Original code was laid out by our collaborator, Aine Niamh O'Toole. The goal of our project is to adjust the baseline code to suit our needs. The original package screened for common types of human norovirus. However, our group at the NIH studies less common genotypes and unique strains evolving within immunocompromised patients. When testing out the original code, many of our samples failed to be mapped, and we could not generate consensus sequences for the samples. Our goals are to:
- * Update the code to allow for more primers and reference strains to be accomodated
- * Reprogram the RAMPART visualization to allow references to be assigned to ORFs (instead of the whole genome) and mapping shows recombination sites
- * Fix the binning problems of each of the barcoded reads
- * Generate consensus sequences for our samples
-
-Everything below was taken from the original README file:
+# universal-realtime-noro
 
 This pipeline complements [``RAMPART``](https://github.com/artic-network/rampart) and continues downstream analysis to consensus level.
 
@@ -34,21 +27,21 @@ This pipeline will run on MacOS and Linux. An install of Miniconda will make the
 Clone this repository:
 
 ```
-git clone https://github.com/aineniamh/realtime-noro.git
+git clone https://github.com/jessvls/project_spring_2020.git
 ```
 
 1. Create the conda environment.
 This may take some time, but will only need to be done once. It allows the pipeline to access all the software it needs, including RAMPART.
 
 ```
-cd realtime-noro
+cd universal-realtime-noro
 conda env create -f environment.yml
 ```
 
 2. Activate the conda environment.
 
 ```
-conda activate realtime-noro
+conda activate universal-realtime-noro
 ```
 
 ## Setting up your run
@@ -81,9 +74,9 @@ sample4,BC04
 
 ## Checklist
 
-- The conda environment ``realtime-noro`` is active.
+- The conda environment ``universal-realtime-noro`` is active.
 - ``barcodes.csv`` file with sample to barcode mapping either in the current directory or the path to it will need to be provided.
-- ``annotations`` directory with csv files from RAMPART
+- ``annotations`` directory with csv files from RAMPART (will be generated upon initiation of RAMPART)
 - The path to basecalled ``.fastq`` files is provided either in the ``run_configuration.json`` or it will need to be specified on the command line.
 
 ## Running RAMPART
@@ -174,7 +167,7 @@ These are the main output files with summary information and the consensus seque
 
 ## Reference FASTA
 
-The ``references.fasta`` file was provided by [Sunando Roy](https://iris.ucl.ac.uk/iris/browse/profile?upi=SROYX79) and is a detailed database containing whole genome sequences from an array of norovirus sequences. 
+The ``references.fasta`` file was updated by Jessica van Loben Sels to represent newly defined ORFs 1 and 2 of all noroviruses, regardless if they are fractions of or complete ORFs. They supplement the reference file from the original realtime-noro platform. 
 
 
 ## License
