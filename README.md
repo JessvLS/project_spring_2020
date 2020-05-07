@@ -1,4 +1,6 @@
 # universal-realtime-noro
+Jessica van Loben Sels and Daniel Kim
+
 Original code was laid out by our collaborator, Aine Niamh O'Toole. The goal of our project is to adjust the baseline code to suit our needs. The original package screened for common types of human norovirus. However, our group at the NIH studies less common genotypes and unique strains evolving within immunocompromised patients. When testing out the original code, many of our samples failed to be mapped, and we could not generate consensus sequences for the samples. Our goals are to:
  * Update the code to allow for more primers and reference strains to be accomodated
  * Reprogram the RAMPART visualization to allow references to be assigned to ORFs (instead of the whole genome) and to allow mapping to show recombination sites
