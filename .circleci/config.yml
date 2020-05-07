@@ -1,31 +1,15 @@
-package:
-  name: universal-realtime-noro
-  version: "0.1.0"
+version: 2
+jobs:
+    build:
 
-source:
-  git_url: https://github.com/JessvLS/project_spring_2020.git
-
-build:
-  noarch: python
-  number: 0
-  script: python -m pip install --no-deps --ignore-installed .
-
-requirements:
-  build:
-    - git
-    - cmake
-  host:
-    - python
-    - pip
-  run:
-    - python
-
-test:
-  imports:
-    - run_test.txt
-
-about:
-  home: https://github.com/JessvLS/project_spring_2020
-  license: Apache-2.0
-  license_file: LICENSE
-  summary: 'Visualization, consensus building of norovirus genomes using Nanopopre data'
+        docker:
+          - image: continuumio/anaconda3
+        working_directory: /tmp/src
+        steps:
+          - checkout
+          - run:
+              command: |
+                conda create -f env environment.yml
+                conda activate universal-realtime-noro
+                pip install .
+                pytest  --showlocals tests
