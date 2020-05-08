@@ -11,5 +11,5 @@ jobs:
               command: |
                 conda create -f env environment.yml
                 conda activate universal-realtime-noro
-                pip install universal-realtime-noro_package
+                pip install .
                 pytest  --showlocals tests
