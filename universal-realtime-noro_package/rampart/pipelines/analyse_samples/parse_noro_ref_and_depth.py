@@ -5,6 +5,7 @@ from collections import defaultdict
 import csv
 import sys
 
+"""This command bins each amplicon according to barcode and creates csv files which report data concerning coverage and reference matches""""
 def parse_args():
     parser = argparse.ArgumentParser(description='Assess reference depth per amplicon/ orf and bin appropriately.')
 
@@ -29,22 +30,27 @@ def parse_csv(file):
     data = [r for r in reader]
     return data
 
+"""This argument counts each amplicon according to which portion of the genome it covers (1-5 regions along the genome) - Amp123 from original code were separated due to incorrect position assignment in original code."""
 def get_files_and_stems(in_csv, bin_factor, min_reads, output_path, references, sample):
 
     bin_factor_counts = {
-        "Amp123": collections.Counter(),
+        "Amp1": collections.Counter(),
+        "Amp2": collections.Counter(),
+        "Amp3": collections.Counter(),
         "Amp4": collections.Counter(),
         "Amp5": collections.Counter()
         }
         
     best_ref_counts = {
-            "Amp123": collections.Counter(),
+            "Amp1": collections.Counter(),
+            "Amp2": collections.Counter(),
+            "Amp3": collections.Counter(),
             "Amp4": collections.Counter(),
             "Amp5": collections.Counter()
         }
 
-    bin_factor_map= {"Amp123": {},"Amp4": {},"Amp5": {}}
-    min_reads_per_amp = {"Amp123":min_reads*3,"Amp4":min_reads,"Amp5":min_reads}
+    bin_factor_map= {"Amp1": {},"Amp2": {}, "Amp3": {}, "Amp4": {},"Amp5": {}}
+    min_reads_per_amp = {"Amp1":min_reads,"Amp2":min_reads, "Amp3":min_reads, "Amp4":min_reads,"Amp5":min_reads}
 
     with open(in_csv,"r") as f:
         for row in parse_csv(f):
@@ -58,7 +64,7 @@ def get_files_and_stems(in_csv, bin_factor, min_reads, output_path, references, 
     greater_than_minimum_bin_factors = defaultdict(list)
     relevant_accessions = defaultdict(list)
 
-    for amplicon in ["Amp123","Amp4","Amp5"]:
+    for amplicon in ["Amp1", "Amp2", "Amp3", "Amp4","Amp5"]:
         
         for factor in bin_factor_counts[amplicon]:
             if bin_factor_counts[amplicon][factor] > min_reads_per_amp[amplicon]: #amp123 requires 3 times as many reads
@@ -70,7 +76,7 @@ def get_files_and_stems(in_csv, bin_factor, min_reads, output_path, references, 
                 if factor == bin_factor_map[amplicon][best_ref]: #if GII16 == the loc_genotype for that accession no
                     relevant_accessions[amplicon].append(best_ref)
     
-    common_to_all = list(set(relevant_accessions["Amp123"]) & set(relevant_accessions["Amp4"]) & set(relevant_accessions["Amp5"]))
+    common_to_all = list(set(relevant_accessions["Amp1"]) & set(relevant_accessions["Amp2"]) & set(relevant_accessions["Amp3"]) & set(relevant_accessions["Amp4"]) & set(relevant_accessions["Amp5"]))
 
     analysis_guides = defaultdict(list)
 
@@ -81,7 +87,7 @@ def get_files_and_stems(in_csv, bin_factor, min_reads, output_path, references, 
                 analysis_guides[amplicon].append(info_to_pass)
                 
     else:
-        for amplicon in ["Amp123","Amp4","Amp5"]:
+        for amplicon in ["Amp1", "Amp2," "Amp3", "Amp4","Amp5"]:
             for factor in greater_than_minimum_bin_factors[amplicon]:
                     
                     top_ref_per_factor = []
@@ -104,9 +110,11 @@ def get_files_and_stems(in_csv, bin_factor, min_reads, output_path, references, 
                 amp = row["amplicon"] 
                 factor = row[bin_factor]
                 orf = ""
-                if amp in ["Amp123","Amp5"]:
-                    if amp == "Amp123":
+                if amp in ["Amp1","Amp2","Amp3","Amp5"]:
+                    if amp == "Amp1", "Amp2":
                         orf = "ORF1"
+                    if amp == "Amp3":
+                        orf = "ORF12"
                     else:
                         orf = "ORF23"
                     for guide in analysis_guides[amp]:
