@@ -12,4 +12,4 @@ jobs:
                 conda create -f env environment.yml
                 conda activate universal-realtime-noro
                 pip install .
-                pytest  --showlocals tests
+                unittest  --showlocals tests
