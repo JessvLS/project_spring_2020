@@ -12,6 +12,7 @@ def parse_args():
 
     return parser.parse_args()
 
+"""Changed original code to reassign amplicon placement along ORFs"""
 def make_amp_dict(amplicons):
     amp_dict = collections.defaultdict(list)
     with open(str(amplicons), "r") as f:
@@ -20,9 +21,15 @@ def make_amp_dict(amplicons):
             tokens= l.split(",")
             accession,reference,amplicon= tokens[0].split('|')
             coords=tokens[1].split(':')
-            if amplicon in ["Amp1","Amp2","Amp3"]:
-                amp_dict["Amp123"].append(int(coords[0]))
-                amp_dict["Amp123"].append(int(coords[1]))
+            if amplicon in ["Amp1"]:
+                amp_dict["Amp1"].append(int(coords[0]))
+                amp_dict["Amp1"].append(int(coords[1]))
+            if amplicon in ["Amp2"]:
+                amp_dict["Amp2"].append(int(coords[0]))
+                amp_dict["Amp2"].append(int(coords[1]))
+            if amplicon in ["Amp3"]:
+                amp_dict["Amp3"].append(int(coords[0]))
+                amp_dict["Amp3"].append(int(coords[1]))
             if amplicon in ["Amp4"]:
                 amp_dict["Amp4"].append(int(coords[0]))
                 amp_dict["Amp4"].append(int(coords[1]))
