@@ -1,0 +1,120 @@
+#On April 16, 2020:
+
+"Got approval to work on the RAMPART sequencing pipeline for norovirus, a project whose code was laid out by a collaborator, but would be updated for our lab's purposes"
+
+#On April 20, 2020:
+
+" * Original files were uploaded from https://github.com/aineniamh/realtime-noro"
+" * README.md was updated to include the project goals we intended to accomplish"
+
+#On April 21, 2020:
+
+" * A new references.fasta was crafted to merge the exisiting reference sequences with a complete set of references for all uncommon noro strains"
+
+#On April 22,2020:
+
+" * genome.json was edited to correct for overlapping ORFs - original file did not have this overlap"
+" * genome.json was edited to have correct GI numbering to accommodate mapping noro genomes larger than GI.1"
+" * pipelines.json was edited to drop 'min_read' coverage from 50 to 10 to assume complete genome coverage"
+" * protocol.json was edited to drop 'min_identity' from 'annotationOptions' from 50 to 10 to assure complete genome coverage"
+" * protocol.json was edited to remove 'require_two_barcodes' from 'annotationOptions' to account for poor barcoding during wetlab prep"
+" * primer_file.csv was updated to include the primers our lab used to generate amplicon pools spanning each noro genotype"
+" * RAN A TEST RUN OF DATA - FAIL"
+" * Updated RAMPART and environment.yml used to run the current version of RAMPART"
+" * RE-RAN TEST RUN - SUCCESS; Issue 1 fixed; Issues 2, 3, 4 outlined in our goals on the README.md still stand"
+
+#On April 23, 2020:
+
+" * README.md containing our goals and original text was moved to parent folder; new README.md was crafted under project_spring_2020/project_spring_2020"
+" * Test fastq files containing sequences from a noro run were added to the 'tests/test-fastq' directory"
+
+#On May 4, 2020:
+
+" * environment.yml was moved to root directory"
+" * setup.py was coded for, but unsure of how to finalize packaging - do we need to upload it to pypi?"
+
+#On May 7, 2020:
+
+" * README.md files were merged in root dir"
+" * config.yml from circleci folder was deleted; created new branch to undo mistake"
+" * config.yml was updated to reflect conda package information"
+" * run_test.py changed to run_test.txt as per notation in meta.yaml"
+
+#Current work:
+
+" * Issue 2 - Visualization issues are coded within the RAMPART program and are coded in JavaScript - will need to contact original coder James Hadfield."
+" * Issues 3 and 4 - Consensus pipelines have been updated following NCoV2019 work - we are working with original coding team to update python script in Snakemake files accordingly."
+
+#On May 8, 2020:
+
+Build package (files with * were created/modified by us):
+
+project_spring_2020
+	environment.yml*
+	README.md*
+	.gitignore
+	LICENSE
+	meta.yaml*
+	setup.py*
+	.circleci
+		config.yml*
+	universal-realtime-noro_package
+		__init__.py*
+		barcodes.csv*
+		genome.json*
+		pipelines.json*
+		primer_file.csv*
+		primers.json
+		protocol.json*
+		references.fasta*
+		run_configuration.json*
+		test-fastq*
+			(~100 fastq files)		
+		pipelines
+			analyse_samples
+				assign_amplicon.py
+				config.yaml
+				parse_noro_ref_and_depth.py
+				Snakefile
+				summary_info_from_rampart.py
+			process_sample
+				Snakefile
+				rules
+					clean.py
+					generate_report.py
+					map_polish.smk
+					mask_low_coverage.py
+					mask_low_coverage.smk
+					merge.py
+					trim_primers.py
+					variants.smk
+ 	tests*
+
+Found test templates for:
+
+  - nodejs - could not test - JAVA
+  - biopython - JvLS
+  - bwa - JvLS
+  - clint - JvLS
+  - eigen - JvLS (C++ code)
+  - pysam - JvLS
+  - pyvcf - JvLS
+  - ete3 - 
+  - goalign - 
+  - gotree - 
+  - libdeflate - JvLS
+  - muscle - 
+  - nanopolish - (proprietary)
+  - medaka - DK
+  - longshot - 
+  - phyml - DK
+  - pandas - DK
+  - samtools - (same as pysam?)
+  - mafft - DK
+  - iqtree - DK
+  - datrie - DK
+  - snakemake-minimal - (look online)
+  - minimap2 - 
+  - seqtk - 
+  - bcftools - 
+
