@@ -41,7 +41,7 @@ git clone https://github.com/jessvls/project_spring_2020.git
 This may take some time, but will only need to be done once. It allows the pipeline to access all the software it needs, including RAMPART.
 
 ```
-cd universal-realtime-noro
+cd project_spring_2020
 conda env create -f environment.yml
 ```
 
@@ -51,33 +51,11 @@ conda env create -f environment.yml
 conda activate universal-realtime-noro
 ```
 
-## Setting up your run
+## Setting up your run (using example test-fastq)
 
 
-If you have a ``run_configuration.json`` file and a ``barcodes.csv`` file, you can run RAMPART with very few command line options. A template of the configuration files needed to run both RAMPART and the downstream analysis pipeline is provided in the ``examples`` directory.
+The files in the universal-realtime-noro_package have been changed to run using the fastq files in the test-fastq folder. If creating a run using another data set, the run_configuration.json can specify the path to your basecalled reads or alternatively you can input that information on the command line. `basecalledPath` should be set to wherever MinKNOW/guppy is going to write its basecalled files. If you want alter where the annotations files from RAMPART or the analysis files from the downstream pipeline are put, you can add the optional ``"annotatedPath"`` and ``"outputPath"`` options. 
 
-The run_configuration.json can specify the path to your basecalled reads or alternatively you can input that information on the command line. `basecalledPath` should be set to wherever MinKNOW/guppy is going to write its basecalled files. If you want alter where the annotations files from RAMPART or the analysis files from the downstream pipeline are put, you can add the optional ``"annotatedPath"`` and ``"outputPath"`` options. By default the annotations are written to a directory called ``annotations`` and the analysis output is written to a directory called ``analysis``.
-
-```
-run_configuration.json
-
-{
-  "title": "MinION_run_example",
-  "basecalledPath": "fastq_pass"
-}
-```
-
-Optional for RAMPART, but required for the downstream analysis pipeline, the ``barcodes.csv`` file describes which barcode corresponds to which sample. Note that you can have more than one barcode for each sample, but they will be merged in the analysis.
-
-```
-barcodes.csv
-
-sample,barcode
-sample1,BC01
-sample2,BC02
-sample3,BC03
-sample4,BC04
-```
 
 ## Checklist
 
@@ -101,7 +79,7 @@ Where `[run_name]` is whatever you are calling todays run (as specified in MinKN
 With this setup, to run RAMPART:
 
 ```
-rampart --protocol path/to/universal-realtime-noro/rampart 
+rampart --protocol ~/universal-realtime-noro_package/rampart 
 ```
 
 Open a web browser to view [http://localhost:3000](http://localhost:3000)
@@ -130,7 +108,7 @@ usage: rampart [-h] [-v] [--verbose] [--ports PORTS PORTS]
 Recommended: all samples can be analysed in parallel by editing the following command to give the path to realtime-noro and then typing it into the command line:
 
 ```
-postbox -p path/to/universal-realtime-noro
+postbox -p path/to/universal-realtime-noro_package/rampart
 ```
 
 ```
