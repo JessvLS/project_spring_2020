@@ -28,7 +28,7 @@ This pipeline complements [``RAMPART``](https://github.com/artic-network/rampart
   * [License](#license)
 
 ## Requirements
-This pipeline will run on MacOS and Linux. An install of Miniconda will make the setup of this pipeline on your local machine much more streamlined. To install Miniconda, visit here https://conda.io/docs/user-guide/install/ in a browser, select your type of machine (mac or linux) and follow the link to the download instructions. We recommend to install the 64-bit Python 3.7 version of Miniconda. 
+This pipeline will run on MacOS and Linux. An install of Miniconda will make the setup of this pipeline on your local machine much more streamlined. To install Miniconda, visit here https://conda.io/docs/user-guide/install/ in a browser, select your type of machine (mac or linux) and follow the link to the download instructions. We recommend to install the 64-bit Python 3.7 version of Miniconda. Anaconda may need to be deleted to run properly.
 
 ## Installation
 Clone this repository:
@@ -49,6 +49,7 @@ conda env create -f environment.yml
 
 ```
 conda activate universal-realtime-noro
+cd universal-realtime-noro
 ```
 
 ## Setting up your run (using example test-fastq)
@@ -69,8 +70,8 @@ The files in the universal-realtime-noro_package have been changed to run using 
 Create run folder:
 
 ```
-mkdir [run_name]
-cd [run_name]
+cd rampart
+
 ```
 
 Where `[run_name]` is whatever you are calling todays run (as specified in MinKNOW).
@@ -79,7 +80,7 @@ Where `[run_name]` is whatever you are calling todays run (as specified in MinKN
 With this setup, to run RAMPART:
 
 ```
-rampart --protocol ~/universal-realtime-noro_package/rampart 
+rampart
 ```
 
 Open a web browser to view [http://localhost:3000](http://localhost:3000)
